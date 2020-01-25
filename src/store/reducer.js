@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
             console.log(state.results);
             return {
                 ...state,
-                results: state.results.concat({id: new Date(), value: state.counter})
+                results: [...state.results, {value: state.counter, id: new Date()}]
             }
         case "DELETECOUNTER":
             console.log("deletecounter");

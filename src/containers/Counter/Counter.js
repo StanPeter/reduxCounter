@@ -8,10 +8,8 @@ class Counter extends Component {
     state = {
         counter: 0
     }
-
-    render () {
-        console.log(this.props);
-        
+    render () {        
+        console.log(this.props.results);
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
@@ -23,7 +21,9 @@ class Counter extends Component {
                 <button onClick={this.props.onStoreCounter} style={{display: "block", margin: "0 auto"}}>Add Number</button>
 
                 <ul>
-                    {this.props.resultCtr}
+                {this.props.resultCtr.map((result) => (
+                    <li key={result.id}>{result}</li>
+                ))}
                 </ul>
             </div>
         );
