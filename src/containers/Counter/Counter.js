@@ -9,31 +9,17 @@ class Counter extends Component {
         counter: 0
     }
 
-    counterChangedHandler = ( action, value ) => {
-        switch ( action ) {
-            case 'inc':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
-                break;
-            case 'dec':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
-                break;
-            case 'add':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
-                break;
-            case 'sub':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
-                break;
-        }
-    }
-
+    console.log(this.props);
+    console.log(this.props.onAddition);
+    
     render () {
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
-                <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} />
-                <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
-                <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  />
+                <CounterControl label="Increment" clicked={() => this.props.onIncrement} />
+                <CounterControl label="Decrement" clicked={() => this.props.onAddition}  />
+                <CounterControl label="Add 5" clicked={() => this.props.onAddition}  />
+                <CounterControl label="Subtract 5" clicked={() => this.props.onSubstraction}  />
             </div>
         );
     }
@@ -45,4 +31,13 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = dispatch => {
+    return {
+        onIncrement: () => dispatch({type: "INCREMENT"}),
+        onDecrement: () => dispatch({type: "DECREMENT"}),
+        onAddition: () => dispatch({type: "ADDITION", value: 5}),
+        onSubstraction: () => dispatch({type: "SUBSTRACTION", value: 5})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
