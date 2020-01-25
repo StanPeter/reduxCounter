@@ -1,24 +1,38 @@
 const initialState = {
-    counter: 0
+    counter: 0,
+    results: []
 };
 
 const reducer = (state = initialState, action) => {
-    if (action.type === "INCREMENT") {
-        return {
-            counter: state.counter + 1
-        }
-    } else if (action.type === "DECREMENT") {
-        return {
-            counter: state.counter - 1
-        }
-    } else if (action.type === "ADDITION") {
-        return {
-            counter: state.counter + action.value
-        }
-    } else if (action.type === "SUBSTRACTION") {
-        return {
-            counter: state.counter - action.value
-        }
+    switch (action.type) {
+        case "INCREMENT":
+            return {
+                ...state,
+                counter: state.counter + 1
+            }
+        case "DECREMENT":
+            return {
+                ...state,
+                counter: state.counter - 1
+            }
+        case "ADDITION":
+            return {
+                ...state,
+                counter: state.counter + action.value
+            }
+        case "SUBSTRACTION":
+            return {
+                ...state,
+                counter: state.counter - action.value
+            }
+        case "STORECOUNTER":
+            console.log(state.results);
+            return {
+                ...state,
+                results: state.results.concat({id: new Date(), value: state.counter})
+            }
+        case "DELETECOUNTER":
+            console.log("deletecounter");
     }
     return state;
 }
