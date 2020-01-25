@@ -9,17 +9,16 @@ class Counter extends Component {
         counter: 0
     }
 
-    console.log(this.props);
-    console.log(this.props.onAddition);
-    
     render () {
+        console.log(this.props);
+        
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
-                <CounterControl label="Increment" clicked={() => this.props.onIncrement} />
-                <CounterControl label="Decrement" clicked={() => this.props.onAddition}  />
-                <CounterControl label="Add 5" clicked={() => this.props.onAddition}  />
-                <CounterControl label="Subtract 5" clicked={() => this.props.onSubstraction}  />
+                <CounterControl label="Increment" clicked={() => this.props.onIncrement()} />
+                <CounterControl label="Decrement" clicked={() => this.props.onDecrement()}  />
+                <CounterControl label="Add 5" clicked={() => this.props.onAddition()}  />
+                <CounterControl label="Subtract 5" clicked={() => this.props.onSubstraction()}  />
             </div>
         );
     }
