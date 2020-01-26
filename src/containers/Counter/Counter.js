@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import CounterControl from '../../components/CounterControl/CounterControl';
-import CounterOutput from '../../components/CounterOutput/CounterOutput';
+import CounterControl from "../../components/CounterControl/CounterControl";
+import CounterOutput from "../../components/CounterOutput/CounterOutput";
+import * as actionTypes from "../../store/action";
 
 class Counter extends Component {
     state = {
         counter: 0
     }
     render () {        
-        console.log(this.props.results);
         return (
             <div>
                 <CounterOutput value={this.props.ctr} />
@@ -22,7 +22,7 @@ class Counter extends Component {
 
                 <ul>
                 {this.props.resultCtr.map((result) => (
-                    <li key={result.id}>{result}</li>
+                    <li onClick={() => this.props.onDeleteCounter(result.id)} key={result.id}>{result.value}</li>
                 ))}
                 </ul>
             </div>
@@ -39,12 +39,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrement: () => dispatch({type: "INCREMENT"}),
-        onDecrement: () => dispatch({type: "DECREMENT"}),
-        onAddition: () => dispatch({type: "ADDITION", value: 5}),
-        onSubstraction: () => dispatch({type: "SUBSTRACTION", value: 5}),
-        onStoreCounter: () => dispatch({type: "STORECOUNTER"}),
-        onDeleteCounter: () => dispatch({type: "DELETECOUNTER"})
+        onIncrement: () => dispatch({type: actionTypes.INCREMENT}),
+        onDecrement: () => dispatch({type: actionTypes.DECREMENT}),
+        onAddition: () => dispatch({type: actionTypes.ADDITION, value: 5}),
+        onSubstraction: () => dispatch({type: actionTypes.SUBSTRACTION, value: 5}),
+        onStoreCounter: () => dispatch({type: actionTypes.STORECOUNTER}),
+        onDeleteCounter: (resultId) => dispatch({type: actionTypes.DELETECOUNTER, resultId: resultId})
     };
 };
 
